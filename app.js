@@ -1,4 +1,3 @@
-
 function onReady() {
   let toDos = [];
   let id = 0;
@@ -16,53 +15,51 @@ function onReady() {
       complete: false,
       id: id++
     });
-   newToDoText.value = '';
+    newToDoText.value = '';
 
     renderTheUI();
   }
 
-    function renderTheUI() {
-      const toDoList = document.getElementById('toDoList');
-      toDoList.textContent = '';
+  function renderTheUI() {
+    const toDoList = document.getElementById('toDoList');
+    toDoList.textContent = '';
 
-      toDos.forEach(function(toDo) {
-        const newLi = document.createElement('li');
-        const checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
+    toDos.forEach(function(toDo) {
+      const newLi = document.createElement('li');
+      const checkbox = document.createElement('input');
+      checkbox.type = "checkbox";
 
-        const title = document.createElement('span')
-        newLi.textContent = toDo.title;
+      const title = document.createElement('span')
+      newLi.textContent = toDo.title;
 
-        toDoList.appendChild(newli);
-        newLi.appendChild(checkbox);
+      toDoList.appendChild(newLi);
+      newLi.appendChild(checkbox);
 
-        let deleteButton = document.createElement('button');
-        deleteButton.textContent = 'delete'
+      let deleteButton = document.createElement('button');
+      deleteButton.textContent = 'delete'
 
-        newLi.appendChild(deleteButton)
+      newLi.appendChild(deleteButton)
 
-        deleteButton.addEventListener('click', () => {
-          deleteToDo(toDo.id);
-          renderTheUI();
-
-
-
+      deleteButton.addEventListener('click', () => {
+        deleteToDo(toDo.id);
+        renderTheUI();
       });
     });
   }
 
-     addToDoForm.addEventListener('submit', event => {
-      event.preventDefault();
-      createNewToDo();
-      newToDoText.value = '';
-    });
+  addToDoForm.addEventListener('submit', event => {
+    event.preventDefault();
+    createNewToDo();
+    newToDoText.value = '';
+  });
 
-function deleteToDo(id){
-  toDos = toDos.filter(item => item.id !==id)
-  renderTheUI();
+  function deleteToDo(id){
+    toDos = toDos.filter(item => item.id !==id)
+    renderTheUI();
+  }
+
 }
 
 window.onload = function() {
   onReady();
 };
-}
